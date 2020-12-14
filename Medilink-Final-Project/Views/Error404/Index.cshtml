@@ -1,0 +1,28 @@
+﻿@model ErrorViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <!-- Banner section start -->
+    <partial name="_Banner" model="Model.BannerViewModel" />
+    <!-- Banner section end -->
+
+    <!-- Error-404 setion start -->
+    <section id="error-404">
+        <div class="container wow flash" data-wow-duration="3s">
+            <div class="page-error">
+                <img src="~/uploads/404.png" class="img-fluid" alt="">
+                <h3>OOPS! THAT PAGE CAN’T BE FOUND.</h3>
+                <p>
+                    The page you are looking is not available or has been removed.
+                    Try going to Home Page by using the button below.
+                </p>
+                <a asp-controller="Home" asp-action="Index">GO TO HOME PAGE</a>
+            </div>
+        </div>
+    </section>
+    <!-- Error-404 setion end -->
+</main>
+

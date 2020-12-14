@@ -1,0 +1,22 @@
+﻿@model List<Medilink_Final_Project.Models.Home.HomeTestimonial>
+<!-- Testimonial section start -->
+<section id="testimonial" style="        background-image: url(/uploads/bg-test.png)">
+    <div class="testimonial-content">
+        <div class="owl-carousel owl-theme">
+            @foreach (var item in Model)
+            {
+                <div class="item wow fadeInDown" data-wow-duration="3s">
+                    <div class="item-img">
+                        <img src="~/uploads/@item.Photo" alt="">
+                    </div>
+                    <div class="item-content">
+                        <p>@item.Description</p>
+                        <h3>@item.FullName</h3>
+                        <h4>@item.Profession</h4>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<!-- Testimonial section end -->

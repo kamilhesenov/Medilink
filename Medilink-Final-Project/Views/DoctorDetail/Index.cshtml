@@ -1,0 +1,194 @@
+﻿@model DoctorDetailViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<main>
+    <!-- Banner section start -->
+    <section id="banner" style="background-image: url(/uploads/banner.jpg)">
+        <div class="page-banner">
+            <div class="container-fluid">
+                <div class="banner-connet">
+                    <h1>@Model.Doctor.FullName</h1>
+                    <div class="breadcrumb-area">
+                        <div class="banner-breadcrumb">
+                            <span class="icon">
+                                <a href="#">
+                                    <span>Medilink</span>
+                                    &nbsp;
+                                </a>
+                                >
+                                <a href="#">
+                                    &nbsp;
+                                    <span>Doctors</span>
+                                    &nbsp;
+                                </a>
+                                >
+                                <a href="#">
+                                    &nbsp;
+                                    <span>@Model.Doctor.Department.Name</span>
+                                    &nbsp;
+                                </a>
+                                >
+                            </span>
+                            <span class="post-page">@Model.Doctor.FullName</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Banner section end -->
+    <!-- Doctot-detail section start -->
+    <section id="doctor-detail">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <div class="widget-about-team wow fadeInLeft" data-wow-duration="3s">
+                                <img src="~/uploads/@Model.Doctor.Photo" class="img-fluid" alt="">
+                                <div class="content">
+                                    <h3>@Model.Doctor.FullName</h3>
+                                    <p>@Model.Doctor.Department.Name</p>
+                                    <span>BDS, FCPS (Hons), PhD (Japan)</span>
+                                </div>
+                            </div>
+                            <div class="widget-team-contact wow fadeInLeft" data-wow-delay="0.5s" data-wow-duration="3s">
+                                <h3>Personal Info</h3>
+                                <ul class="widget-content">
+                                    <li>Phone:  <span>@Model.Doctor.Phone</span></li>
+                                    <li>Office: <span>@Model.Doctor.Office</span></li>
+                                    <li>E-mail: <span>@Model.Doctor.Email</span></li>
+                                    <li class="d-flex">
+                                        Social:
+                                        <ul class="widget-social">
+                                            <li>
+                                                <a href="@Model.Doctor.Facebook"><i class="fab fa-facebook-f"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="@Model.Doctor.Twitter"><i class="fab fa-twitter"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="@Model.Doctor.Linkedin"><i class="fab fa-linkedin-in"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="@Model.Doctor.Gmail"><i class="fab fa-google-plus-g"></i></a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="widget-call-to-action wow fadeInLeft" data-wow-delay="1s" data-wow-duration="3s">
+                                <div class="media">
+                                    <img src="~/img/figure1.png" class="img-fluid" alt="">
+                                    <div class="media-body">
+                                        <h4>Emergency Cases</h4>
+                                        <span>+001236540256</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-12 col-sm-12">
+                            <div class="team-detail-box wow fadeInRight" data-wow-duration="3s">
+                                <div class="single-item">
+                                    <h3>About Me:</h3>
+                                    <p>@Model.Doctor.AboutMe</p>
+                                </div>
+                                <div class="single-item">
+                                    <h3>Education:</h3>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Year</th>
+                                                <th>Degree</th>
+                                                <th>Institute</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>2006</td>
+                                                <td>MBBS, M.D</td>
+                                                <td>University of Wyoming</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2010</td>
+                                                <td>M.D. of Medicine</td>
+                                                <td>Netherland Medical College</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="single-item">
+                                    <h3>Experienced:</h3>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Year</th>
+                                                <th>Department</th>
+                                                <th>Position</th>
+                                                <th>Hospital</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>2007 - 2008</td>
+                                                <td>MBBS, M.D</td>
+                                                <td>Senior Prof.</td>
+                                                <td>Midtown Medical Clinic</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2009 - 2014</td>
+                                                <td>MBBS, M.D</td>
+                                                <td>Senior Prof.</td>
+                                                <td>Midtown Medical Clinic</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="single-item">
+                                    <h3>Appointmnet Schedules:</h3>
+                                    <table class="table schedule-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Day</th>
+                                                <th>Time</th>
+                                                <th>Address</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>sun</td>
+                                                <td>11:30am - 12:30pm</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>thu</td>
+                                                <td>12:00pm - 5:00pm</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>sun</td>
+                                                <td>2:00pm - 7:30pm</td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="content-doctor wow fadeInLeft" data-wow-duration="3s">
+                                <p>@Model.Doctor.Content</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Doctot-detail section end -->
+</main>
+

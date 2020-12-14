@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Medilink_Final_Project.Models.Doctor>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<p class="d-flex justify-content-center align-items-center">
+    <a class="btn btn-outline-success w-25" asp-action="Create"><i class="fas fa-plus"></i></a>
+</p>
+
+<table class="table table-striped table-bordered ml-1">
+    <thead>
+        <tr>
+            <th scope="col">Full Name</th>
+            <th scope="col">Photo</th>
+            <th scope="col">Department Name</th>
+            <th scope="col">AboutMe</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            @*<th scope="col">Office Number</th>
+            <th scope="col">Facebook Account</th>
+            <th scope="col">Twitter Account</th>
+            <th scope="col">Linkedin Account</th>
+            <th scope="col">Gmail Account</th>*@
+            <th scope="col">Content</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@item.FullName</td>
+            <td><img width="100" src="~/uploads/@item.Photo" /></td>
+            <td>@item.Department.Name</td>
+            <td>@item.AboutMe</td>
+            <td>@item.Email</td>
+            <td>@item.Phone</td>
+            @*<td>@item.Office</td>
+            <td>@item.Facebook</td>
+            <td>@item.Twitter</td>
+            <td>@item.Linkedin</td>
+            <td>@item.Gmail</td>*@
+            <td>@item.Content</td>
+            <td>
+                <a class="btn btn-outline-warning w-75" asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-edit"></i></a>
+                <a class="btn btn-outline-info mt-1 w-75" asp-action="Details" asp-route-id="@item.Id"><i class="fas fa-info"></i></a>
+                <a class="btn btn-outline-danger mt-1 w-75" asp-action="Delete" asp-route-id="@item.Id"><i class="fas fa-trash"></i></a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

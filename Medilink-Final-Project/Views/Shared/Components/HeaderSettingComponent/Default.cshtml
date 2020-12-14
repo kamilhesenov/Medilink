@@ -1,0 +1,27 @@
+﻿@model Setting
+@{
+    ViewData["Title"] = "Default";
+}
+
+<div class="col-md-9 col-lg-10">
+    <div class="rt-tophead-contact">
+        <ul>
+            <li class="phone-has-address-off">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>@Model.Address</span>
+            </li>
+            <li class="phone-has-mobile-off">
+                <i class="fas fa-phone"></i>
+                any question:
+                <a href="#">@Model.Phone</a>
+            </li>
+            <li class="phone-has-email-off ml-5">
+                <i class="fa fa-envelope-o"></i>
+                <a href="#">@Model.Email</a>
+            </li>
+            
+            
+          </ul>
+    </div>
+</div>
+

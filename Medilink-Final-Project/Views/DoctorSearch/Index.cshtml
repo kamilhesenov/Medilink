@@ -1,0 +1,141 @@
+﻿@model DoctorSearchViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<main>
+    <!-- Banner section start -->
+    <partial name="_Banner" model="Model.BannerViewModel" />
+    <!-- Banner section end -->
+
+    <!-- Search section start -->
+    <section id="search">
+        <div class="container-fluid">
+            <div class="search">
+                <div class="team-search">
+                    <div class="search-element-widjet">
+                        <div class="search-element">
+                            <div class="team-search-box">
+                                <form asp-action="Index" method="get">
+                                    <div class="row">
+                                          <div class="col-lg-4 col-sm-4">
+                                            <div class="search-item">
+                                                <div class="form-group">
+                                                    <span class="search-select">
+                                                        <span class="selection">
+                                                            <span id="label-name" class="doctor-select">Select Doctor Category</span>
+                                                            <span class="select-arrow">
+                                                                <i class="fas fa-angle-down"></i>
+                                                            </span>
+                                                        </span>
+                                                        <span id="menu" class="search-result">
+
+                                                            <select name="departmentId" id="select-doctor">
+                                                                <option id="select-option" value="0"></option>
+
+                                                            </select>
+                                                            <ul>
+                                                                <li id="label" value="0">Select All Doctors</li>
+                                                               @foreach (var item in ViewBag.Departments)
+                                                                {
+                                                                    <li value="@item.Department.Id" class="link">@item.Department.Name</li>
+                                                                }
+
+                                                            </ul>
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-sm-6">
+                                            <div class="form-group">
+                                                <input class="doctor-name form-controll" type="text" id="name" name="name" placeholder="Type Doctor Name Here ...">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 col-sm-2">
+                                            <div class="form-group">
+                                                <input id="input" class="item-btn" type="submit" value="Search">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="doctor-items">
+                                @foreach (var item in Model.Doctors)
+                                {
+                                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12" data-role="doctor">
+                                        <div class="doctor-item wow fadeInUp" data-wow-duration="3s">
+                                            <div class="team-box">
+                                                <div class="item-img">
+                                                    <img src="~/uploads/@item.Photo" class="img-fluid" alt="">
+                                                    <ul class="item-icon">
+                                                        <li>
+                                                            <a href="#"><i class="fas fa-plus"></i></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="item-content">
+                                                    <h3 class="item-title">
+                                                        <a asp-controller="DoctorDetail" asp-action="Index" asp-route-id="@item.Id">@item.FullName</a>
+                                                    </h3>
+                                                    <p>@item.Department.Name</p>
+                                                </div>
+                                                <div class="item-content-text">
+                                                    <p>@item.AboutMe</p>
+                                                </div>
+                                                <div class="item-schedule">
+                                                    <div class="btn-holder">
+                                                        <a asp-controller="DoctorDetail" asp-action="Index" asp-route-id="@item.Id">Book an Appointment</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Search section end -->
+
+    <!-- Need-doctor section start -->
+    <partial name="_NeedDoctor" />
+
+</main>
+
+@section Scripts{ 
+<script>
+    var link = document.querySelectorAll(".link");
+    var select = document.getElementById("select-doctor");
+    var option = document.getElementById("select-option");
+    var menu = document.getElementById("menu")
+    var buton = document.getElementById("input");
+    var label = document.getElementById("label-name");
+    var li = document.getElementById("label");
+    
+    for (let item of link) {
+        item.addEventListener("click", function (e) {
+            e.preventDefault();
+            option.value = item.value;
+            label.innerHTML = item.innerHTML;
+        })
+    }
+
+    li.addEventListener("click", function (e) {
+        e.preventDefault();
+        label.innerHTML = this.innerHTML;
+        option.value = this.value;
+    })
+
+    $(".doctor-name").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $('div[data-role="doctor"]').filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    })
+
+</script>
+}

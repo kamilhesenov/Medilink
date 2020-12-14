@@ -1,0 +1,138 @@
+﻿@model CheckoutViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<main>
+    <!-- Banner section start -->
+    <partial name="_Banner" model="Model.BannerViewModel" />
+    <!-- Banner section end -->
+
+    <section id="chekout">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="heading">
+                        <h2>Billing details</h2>
+                    </div>
+                </div>
+
+                <div class="form">
+                    <form id="checkoutForm">
+                        <div class="row">
+                            <div class="chekout-guider">
+                                @*<div class="col-lg-10 col-md-12 col-sm-12">
+                                        <div class="form-group">
+                                            <select name="country" id="country" class="form-control">
+                                                <option value="1">Select Country</option>
+                                                <option value="2">Select </option>
+                                                <option value="3"> Department</option>
+                                                <option value="4">Doctor</option>
+                                                <option value="5">Error</option>
+                                            </select>
+                                            <div class="country-icon">
+                                                <i class="fas fa-angle-down"></i>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                                @*<div class="col-lg-10 col-md-12 col-sm-12">
+                                        <div class="form-group">
+                                            <select name="city" id="city" class="form-control">
+                                                <option value="1">Select City</option>
+                                                <option value="2">Select </option>
+                                                <option value="3"> Department</option>
+                                                <option value="4">Doctor</option>
+                                                <option value="5">Error</option>
+                                            </select>
+                                            <div class="city-icon">
+                                                <i class="fas fa-angle-down"></i>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                                <div class="col-lg-10 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <input asp-for="@Model.FullName" type="text" class="form-control name" placeholder="Full Name *">
+                                        <span asp-validation-for="@Model.FullName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-10 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <input asp-for="@Model.Address" type="text" class="form-control address" placeholder="Address *">
+                                        <span asp-validation-for="@Model.Address" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-10 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <input asp-for="@Model.Email" type="text" class="form-control email" placeholder="E-mail *">
+                                        <span asp-validation-for="@Model.Email" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-10 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <input asp-for="@Model.Phone" type="tel" class="form-control phone" placeholder="Phone *">
+                                        <span asp-validation-for="@Model.Phone" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <button type="submit" class="order-check">Place order</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="phoneno-all-numeric-validation.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+   <script>
+       $(document).ready(function () {
+           $("#checkoutForm").submit(function (e) {
+               e.preventDefault();
+               let formData = {
+                   FullName: $(".name").val(),
+                   Email: $(".email").val(),
+                   Address: $(".address").val(),
+                   Phone: $(".phone").val()
+               };
+                 $.ajax({
+                     url: "/Chekout/Send",
+                   type: "post",
+                   data: formData,
+                   success: function (response) {
+                       Swal.fire({
+                           position: 'top-end',
+                           icon: 'success',
+                           title: 'Your products has sended',
+                           showConfirmButton: false,
+                           timer: 1500
+                       }).then(function (result) {
+                           $(".name").val("");
+                           $(".email").val("");
+                           $(".address").val("");
+                           $(".phone").val("");
+                           window.location = "/Home";
+                       })
+                   },
+                   error: function (error) { }
+               })
+           })
+       })
+
+
+       $(document).ready(function () {
+           $('[type=tel]').on('change', function (e) {
+               $(e.target).val($(e.target).val().replace(/[^\d\.]/g, ''));
+           })
+           $('[type=tel]').on('keypress', function (e) {
+               keys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '+'];
+               return keys.indexOf(event.key) > -1;
+           })
+       })
+   </script>
+}

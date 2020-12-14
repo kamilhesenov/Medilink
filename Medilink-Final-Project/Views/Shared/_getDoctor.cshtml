@@ -1,0 +1,6 @@
+﻿@model IEnumerable<Doctor>
+
+@foreach (var item in Model)
+{
+    <option class="doctor-name" value="@item.Id">@item.FullName</option>
+}

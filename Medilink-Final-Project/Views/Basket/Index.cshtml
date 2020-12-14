@@ -1,0 +1,320 @@
+﻿@model IEnumerable<BasketViewModel>
+@{
+    ViewData["Title"] = "Index";
+    double Total = 0;
+}
+
+<main>
+    <!-- Banner section start -->
+    <section id="banner" style="background-image: url(/uploads/banner.jpg)">
+        <div class="page-banner">
+            <div class="container-fluid">
+                <div class="banner-connet">
+                    <h1>Cart</h1>
+                    <div class="breadcrumb-area">
+                        <div class="banner-breadcrumb">
+                            <span class="icon">
+                                <a href="#">
+                                    <span>Medilink</span>
+                                    &nbsp;
+                                </a>
+                                >
+                            </span>
+                            <span class="post-page">Cart</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Banner section end -->
+    <!-- Cart section start -->
+    <section id="cart">
+        <div id="modelContainer" class="container-fluid">
+            @if (Model.Count() > 0)
+            {
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="product-name">ProductName</th>
+                                    <th class="product-thumbnail">Photo</th>
+                                    <th class="product-price">Price</th>
+                                    <th class="product-quantity">Total Quantity</th>
+                                    <th class="product-quantity">Basket Quantity</th>
+                                    <th class="product-subtotal">Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody class="cart-items">
+                                @foreach (BasketViewModel item in Model.Where(x => x.UserName == User.Identity.Name))
+                                {
+                                    double total = item.BasketCount * item.Price;
+                                    Total += total;
+
+                                    <tr>
+                                        <td>@item.Name</td>
+                                        <td><img src="~/img/@item.Photo" width="100" /></td>
+                                        <td>@item.Price.ToString("#.00") ₼</td>
+                                        <td>@item.DbCount</td>
+                                        <td>
+                                            @item.BasketCount
+                                        </td>
+                                        <td id="subtotal">@total.ToString("#.00") ₼</td>
+                                        <td>
+                                            @if (item.BasketCount > 1)
+                                            {
+                                                <a>
+                                                    <i class="fas fa-minus minusProduct" data-id="@item.Id"></i>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a>
+                                                    <i class="fas fa-minus minusProduct d-none" data-id="@item.Id"></i>
+                                                </a>
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (item.BasketCount < item.DbCount)
+                                            {
+                                                <a>
+                                                    <i class="fas fa-plus plusProduct" data-id="@item.Id"></i>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a>
+                                                    <i class="fas fa-plus plusProduct d-none" data-id="@item.Id"></i>
+                                                </a>
+                                            }
+                                        </td>
+                                        <td>
+                                            <a>
+                                                <i class="fas fa-trash-alt text-danger delete removeProduct" data-id="@item.Id"></i>
+                                            </a>
+                                        </td>
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12 col-md-6 col sm-6">
+                        <div class="cart-collaterals">
+                            <div class="cart-totals">
+                                <h2>Cart totals</h2>
+                                <table class="table">
+                                    <tbody>
+
+                                        <tr class="order-total">
+                                            <th>Total</th>
+                                            <td>
+                                                <strong id="basketTotalPrice">@Total.ToString("#.00") ₼</strong>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="checkout">
+                                    <a asp-controller="Chekout" asp-action="Index" class="checkout-buton">Proceed to checkout</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <a class="btn btn-outline-success" asp-controller="Shop" asp-action="Index">
+                                Return to shop
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+</main>
+
+@section Scripts{
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="~/js/toastr.min.js"></script>
+
+    <script>
+
+        let plusProduct = document.querySelectorAll('.plusProduct');
+
+        plusProduct.forEach(item => {
+            item.addEventListener("click", function (e) {
+                var plusBtn = e.target;
+                let formdata = new FormData();
+                let id = plusBtn.getAttribute("data-id");
+                formdata.append("id", id);
+                axios.post('/basket/ProductCountPlus', formdata)
+                    .then(function (response) {
+                        console.log(response.data);
+                        let basketTotalPrice = document.getElementById('basketTotalPrice');
+                        
+
+                        plusBtn.parentElement.parentElement.previousElementSibling.previousElementSibling.textContent = response.data.productTotalPrice + " ₼";
+                        basketTotalPrice.innerHTML = response.data.basketTotalPrice + " ₼";
+
+                        plusBtn.parentElement.parentElement.previousElementSibling.
+                         previousElementSibling.previousElementSibling.textContent = response.data.productBasketCount;
+
+                        if (response.data.productBasketCount > 1) {
+                            plusBtn.parentElement.parentElement.previousElementSibling
+                                .firstElementChild.firstElementChild.classList.remove('d-none');
+                        }
+                        
+                        if (response.data.productBasketCount == response.data.basketProductDbCount) {
+                            plusBtn.classList.add('d-none');
+                        }
+                        
+                    })
+                    .catch(function (error) {
+                        if (error.response) {
+                            let errorObj = error.response.data;
+                            for (let errors in errorObj) {
+                                let error = errorObj[errors];
+                                console.log(error);
+                            }
+                        }
+                    });
+            })
+        })
+    </script>
+
+    <script>
+        let minusProduct = document.querySelectorAll('.minusProduct');
+        minusProduct.forEach(item => {
+            item.addEventListener("click", function (e) {
+                var minusBtn = e.target;
+                let formdata = new FormData();
+                let id = minusBtn.getAttribute("data-id");
+                formdata.append("id", id);
+                axios.post('/basket/ProductCountMinus', formdata)
+                    .then(function (response) {
+                        console.log(response.data.productBasketCount)
+                        console.log(response.data.basketProducts)
+                        console.log(response.data.basketTotalPrice)
+                        let basketTotalPrice = document.getElementById('basketTotalPrice');
+                        
+
+                        
+
+                        minusBtn.parentElement.parentElement.previousElementSibling.textContent = response.data.productTotalPrice + " ₼";
+                        basketTotalPrice.innerHTML = response.data.basketTotalPrice + " ₼";
+
+
+                        //if (response.data.productBasketCount == 1) {
+                        //    minusBtn.parentElement.parentElement.innerHTML = '';
+                        //}
+                        minusBtn.parentElement.parentElement.previousElementSibling.previousElementSibling.textContent = response.data.productBasketCount;
+
+                        if (response.data.productBasketCount == 1) {
+                            minusBtn.classList.add('d-none');
+                        }
+                        else {
+                            minusBtn.parentElement.parentElement.nextElementSibling.
+                                firstElementChild.firstElementChild.classList.remove('d-none');
+                        }
+
+                    })
+                    .catch(function (error) {
+                        if (error.response) {
+                            let errorObj = error.response.data;
+                            for (let errors in errorObj) {
+                                let error = errorObj[errors];
+                                console.log(error);
+                            }
+                        }
+                    });
+            })
+        })
+    </script>
+
+
+
+
+    <script>
+
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-center",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+
+
+        let allRemove = document.querySelectorAll(".removeProduct")
+        allRemove.forEach(item => {
+            item.addEventListener("click", function () {
+                event.preventDefault();
+                let id = $(this).attr("data-id");
+                toastr.error(`the product has removed from your cart`)
+                $.ajax({
+                    url: "/Basket/RemoveItem?Id=" + id,
+                    type: "Get",
+                    success: function (res) {
+                        let basketTotalPrice = document.getElementById('basketTotalPrice');
+                        let totalCountNav = document.getElementById('totalCountNav');
+                        
+
+                        
+                        basketTotalPrice.innerHTML = res.basketTotalPrice + " ₼";
+                        totalCountNav.innerHTML = res.basketProductCount;
+                        item.parentElement.parentElement.parentElement.remove();
+                        var div = `<div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <a class="btn btn-outline-success" href="/products">
+                                    Return to shop
+                                </a>
+                            </div>
+                        </div>
+                    </div>`
+                        let modelContainer = document.getElementById("modelContainer");
+                        if (res.basketTotalPrice == 0) {
+                            modelContainer.innerHTML = div;
+                        }
+                    }
+                })
+            })
+        })
+
+    </script>
+}
+
+@section Style{
+    <style>
+        .removeProduct {
+            cursor: pointer;
+        }
+        .minusProduct {
+            cursor: pointer;
+        }
+        .plusProduct {
+            cursor: pointer;
+        }
+    </style>
+}

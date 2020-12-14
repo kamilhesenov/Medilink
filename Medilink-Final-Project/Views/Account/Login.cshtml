@@ -1,0 +1,68 @@
+﻿@model LoginViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/font/flaticon.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <script src="https://kit.fontawesome.com/f3c06c98be.js" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body id="login">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="img">
+                    <img src="~/img/login-banner.png" alt="">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="login">
+                    <div class="content">
+                        <h1>Login</h1>
+                    </div>
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="text"></div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input asp-for="@Model.Email" type="email" class="form-control" id="email">
+                            <span asp-validation-for="@Model.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input asp-for="@Model.Password" type="password" class="form-control" id="password">
+                            <span asp-validation-for="@Model.Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" class="form-control" id="remember">
+                            <label for="remember">Remember Me</label>
+                            <button type="submit" class="login-btn">Log In</button>
+                        </div>
+                        <div class="account">
+                            Don’t have an account?  <a asp-controller="Account" asp-action="Register">Register</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="~/js/wow.min.js"></script>
+    <script src="~/js/main.js"></script>
+</body>
+</html>
+

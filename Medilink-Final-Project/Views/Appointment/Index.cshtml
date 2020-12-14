@@ -1,0 +1,214 @@
+﻿@model AppointmentViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<main>
+    <!-- Banner section start -->
+    <partial name="_Banner" model="Model.BannerViewModel" />
+    <!-- Banner section end -->
+
+    <!-- Appointment section start -->
+    <section id="appointment">
+        <div class="container-fluid">
+            <div class="appointment-container">
+                <div class="row">
+                    <div class="col-lg-6 col md-6 col-sm-12">
+                        <div class="appointment-column-wrap wow fadeInLeft" data-wow-duration="3s">
+                            <div class="appointment-widget">
+                                <div class="heading">
+                                    <h2>Make an Appointment</h2>
+                                </div>
+                                <div class="content">
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,
+                                        luctus nec ullamcorper mattis, pulvinar dapibus leo.
+                                    </p>
+                                </div>
+                                <div class="form">
+                                    <form id="appointment-form">
+                                        <div class="appointment-box">
+                                            <div class="row">
+                                                <div class="appointment-guider">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        <div class="form-group">
+                                                            <select name="department" id="department" class="form-control">
+                                                                <option value="0" selected disabled>Select Department</option>
+                                                                @foreach (var item in Model.Departments)
+                                                                {
+                                                                    <option class="lorem" value="@item.Id">@item.Name</option>
+                                                                }
+                                                            </select>
+                                                            <div class="department-icon">
+                                                                <i class="fas fa-angle-down"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        <div class="form-group">
+                                                            <select name="doctor" id="doctor" class="form-control">
+                                                                <option value="0" selected disabled>Choose Doctor by Name</option>
+                                                                @foreach (var item in Model.Doctors)
+                                                                {
+                                                                    
+                                                                }
+                                                            </select>
+                                                            <div class="doctor-icon">
+                                                                <i class="fas fa-angle-down"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        <div class="form-group">
+                                                            <input asp-for="@Model.AppointmentSendViewModel.PatientName" type="text" class="form-control patient" placeholder="Patient Name *" >
+                                                            <span asp-validation-for="@Model.AppointmentSendViewModel.PatientName" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <input asp-for="@Model.AppointmentSendViewModel.Phone" type="tel" class="form-control phone" placeholder="Phone *">
+                                                            <span asp-validation-for="@Model.AppointmentSendViewModel.Phone" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <input asp-for="@Model.AppointmentSendViewModel.Email" type="email" class="form-control email" placeholder="E-mail*" >
+                                                            <span asp-validation-for="@Model.AppointmentSendViewModel.Email" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        <div class="form-group form-date">
+                                                            <input asp-for="@Model.AppointmentSendViewModel.Date" class="form-control date" >
+                                                            <span asp-validation-for="@Model.AppointmentSendViewModel.Date" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        <div class="form-group">
+                                                            <textarea asp-for="@Model.AppointmentSendViewModel.Text" class="form-control message" placeholder="Type Appintment Note" ></textarea>
+                                                            <span asp-validation-for="@Model.AppointmentSendViewModel.Text" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button type="submit" class="add-appointment">Make an Appointment</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 cols-sm-12">
+                        <div class="appointment-img wow fadeInRight" data-wow-duration="3s">
+                            <div class="img">
+                                <img src="~/uploads/@Model.AppointmentPhoto.Photo" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Appointment section end -->
+
+    <!-- service-to-patients section start -->
+    <section id="service-to-patients">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="service wow fadeInLeftBig" data-wow-duration="2s">
+                        <h2>We Provide the highest level of satisfaction care & services to our patients.</h2>
+                        <div class="call-to-action">
+                            <a href="#"><i class="fas fa-phone-alt"></i>+123 44092 888</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- service-to-patients section end -->
+</main>
+
+
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="phoneno-all-numeric-validation.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+
+    <script>
+
+         $(document).ready(function () {
+            $(document).on("change", "#department", function () {
+                let id = $(this).val();
+                event.preventDefault();
+                $.ajax({
+                    url: "/appointment/GetDoctorsByDepartment?Id=" + id,
+                    type: "Get",
+                    success: function (res) {
+                        $("#doctor").empty();
+                        //$("#doctor").html() = res;
+                        $("#doctor").append(res);
+                        $("#doctor").prepend(`<option  value="${0}" selected disabled>Choose Doctor by Name</option>`)
+
+                    }
+                })
+            })
+        })
+
+        $(document).ready(function () {
+            $("#appointment-form").submit(function (e) {
+                e.preventDefault();
+                
+                let formData = {
+                    DoctorId: $("#doctor").val(),
+                    PatientName: $(".patient").val(),
+                    Email: $(".email").val(),
+                    Phone: $(".phone").val(),
+                    Date: $(".date".toString("dd.MMM.yyyy")).val(),
+                    Time: $(".time".toString("HH:dd")).val(),
+                    Text: $(".message").val()
+                };
+                $.ajax({
+                    url: "/appointment/Send",
+                    type: "post",
+                    data: formData,
+                    success: function (response) {
+                        Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Your message has sended',
+                        showConfirmButton: false,
+                        timer: 1500
+                        }).then(function (result) {
+                            $(".patient").val("");
+                            $(".phone").val("");
+                            $(".email").val("");
+                            $(".date").val("");
+                            $(".time").val("");
+                            $(".message").val("");
+                            $("#doctor").html(`<option value="0" selected disabled>Choose Doctor by Name</option>`);
+                            $("#department").html(`<option value="0" selected disabled>Select Department</option>
+                                                   @foreach (var item in Model.Departments)
+                                                   {
+                                                     <option class="lorem" value="@item.Id">@item.Name</option>
+                                                   }`);
+
+                    })
+                    },
+                    error: function (error) { }
+                    })
+                })
+            })
+
+        $(document).ready(function () {
+            $('[type=tel]').on('change', function (e) {
+                $(e.target).val($(e.target).val().replace(/[^\d\.]/g, ''));
+            })
+            $('[type=tel]').on('keypress', function (e) {
+                keys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '+'];
+                return keys.indexOf(event.key) > -1;
+            })
+        })
+    </script>
+}

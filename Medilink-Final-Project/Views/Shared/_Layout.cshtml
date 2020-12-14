@@ -1,0 +1,215 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/font/flaticon.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link href="~/css/toastr.min.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/f3c06c98be.js" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+
+
+    <header>
+        <!-- Header top start -->
+        <section id="header-top">
+            <div class="container-fluid">
+                <div class="row no-gutter">
+                    <vc:header-setting-component></vc:header-setting-component>
+                    <div class="col-md-3 col-lg-2 col-xs-12 tophead-right header-social-layout1  phone-has-social">
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @User.Identity.Name
+                            <a class="btn btn-success ml-5 text-white" asp-controller="account" asp-action="logout">&nbsp;&nbsp;Logout</a>
+                        }
+                        else
+                        {
+                            <div class="login">
+                                <a asp-controller="Account" asp-action="Login">login / Signup </a>
+                            </div>
+                        }
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Header top end -->
+        <!-- Navbar start -->
+        <section id="navbar">
+            <div class="container-fluid">
+                <div class="row d-flex align-items-center">
+                    <div class="col-sm-2 col-xs-12">
+                        <div class="site-branding">
+                            <a asp-controller="Home" asp-action="Index">
+                                <img src="~/img/logo-dark.png" alt="Medilink">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-8 col-xs-2">
+                        <div class="header-icon-area header-action-items-layout2">
+                            @await Component.InvokeAsync("HeaderViewBagComponent")
+                            <div class="clear"></div>
+                        </div>
+                        <div class="site-navigation">
+                            <nav class="menu-main-primary-container">
+                                <ul class="menu-main-primary">
+                                    <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">Home</a></li>
+                                    <li class="nav-item"><a class="nav-link" asp-controller="About" asp-action="Index">About</a></li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-controller="DoctorSearch" asp-action="Index">Doctors</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-controller="Department" asp-action="Index">Departments</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-controller="Shop" asp-action="Index">Shop</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-controller="Contact" asp-action="Index">Contact</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2">
+                        <a class="apointment-btn" asp-controller="Appointment" asp-action="Index">Appointment</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Navbar end -->
+    </header>
+    @RenderBody()
+    <footer>
+        <!-- Footer-top start -->
+        <section id="footer-top">
+            <div class="container-fluid">
+                <div class="row">
+                    <vc:footer-setting-component></vc:footer-setting-component>
+                    <div class="col-lg-3 col-sm-6 col-md-6 col-xs-12">
+                        <div class="single-item">
+                            <div class="nav-menu">
+                                <div class="footer-header">
+                                    <h3>Departments</h3>
+                                </div>
+                                <div class="menu-quick-links-container">
+                                    <ul class="menu-quick-links">
+                                        <li class="menu-item"><a href="#">Who We Are</a></li>
+                                        <li class="menu-item"><a href="#">Our Mission</a></li>
+                                        <li class="menu-item"><a href="#">Awards</a></li>
+                                        <li class="menu-item"><a href="#">Experience</a></li>
+                                        <li class="menu-item"><a href="#">Success Story</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 col-md-6 col-xs-12">
+                        <div class="single-item">
+                            <div class="nav-menu">
+                                <div class="footer-header">
+                                    <h3>Quick Links</h3>
+                                </div>
+                                <div class="menu-quick-links-container">
+                                    <ul class="menu-quick-links">
+                                        <li class="menu-item"><a href="#">Who We Are</a></li>
+                                        <li class="menu-item"><a href="#">Our Mission</a></li>
+                                        <li class="menu-item"><a href="#">Awards</a></li>
+                                        <li class="menu-item"><a href="#">Experience</a></li>
+                                        <li class="menu-item"><a href="#">Success Story</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 col-md-6 col-xs-12">
+                        <div class="single-item">
+                            <div class="open-hour">
+                                <div class="footer-header">
+                                    <h3>Opening Hours</h3>
+                                </div>
+                                <div class="opening-schedule">
+                                    <ul class="footer-opening-hours">
+                                        <li>Monday<span>9.00 - 17.00</span></li>
+                                        <li>Tuesday:<span>9.00 - 17.00</span></li>
+                                        <li>Wednesday:<span>9.00 - 17.00</span></li>
+                                        <li>Thursday:<span>9.00 - 17.00</span></li>
+                                        <li>Friday:<span>9.00 - 17.00</span></li>
+                                        <li>Saturday:<span class="closed">Closed</span></li>
+                                        <li>Sunday:<span>9.00 - 17.00</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Footer-top end -->
+        <!-- Footer-center start -->
+        <section id="footer-center">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="no-gutters">
+                        <vc:footer-social-link-component></vc:footer-social-link-component>
+                        <div class="col-lg-8 col-md-12">
+                            <div class="form">
+                                <div class="row">
+                                    <div class="col-md-6 col-12">
+                                        <div class="newsletter-title">
+                                            <h4>Stay informed and healthy</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="newsletter-form">
+                                            <div class="input-group">
+                                                <input type="text" class="form-controll" placeholder="Enter your e-mail" required>
+                                                <span class="input-group-addon">
+                                                    <input type="submit" value="SIGN UP!">
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Footer-center end -->
+        <!-- Footer-bottom start -->
+        <section id="footer-bottom">
+            <div class="copyright">
+                © Copyright MediLink 2019. All Right Reserved. Designed and Developed by
+                <a href="#">RadiusTheme</a>
+            </div>
+        </section>
+        <!-- Footer-bottom end -->
+    </footer>
+
+    <a href="#" class="back-to-top">
+        <i class="fas fa-angle-double-up"></i>
+    </a>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="~/js/wow.min.js"></script>
+    <script src="~/js/toastr.min.js"></script>
+    <script src="~/js/main.js"></script>
+</body>
+@RenderSection("Scripts", false)
+@RenderSection("Style", false)
+</html>

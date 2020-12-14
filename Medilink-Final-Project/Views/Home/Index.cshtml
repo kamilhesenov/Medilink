@@ -1,0 +1,365 @@
+﻿@model HomeViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<main>
+    <!-- Home-intro section start -->
+    <section id="home-intro">
+        <div class="slider ls-overflow-visible">
+            <div class="owl-carousel owl-theme">
+                @foreach (var item in Model.HomeIntros)
+                {
+                    <div class="item wow fadeInDown" data-wow-duration="3s">
+                        <img src="~/uploads/@item.Photo" alt="">
+                        <div class="text">
+                            <h2 class="">@item.Header</h2>
+                            <p>@item.Content</p>
+                            <a href="#">See All Services <i class="fas fa-angle-right"></i></a>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </section>
+    <!-- Home-intro section end -->
+
+    <!-- Welcome-hospital section start -->
+    <section id="welcome-hospital">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="welcome-hospital-item d-flex">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="img wow fadeInLeft" data-wow-duration="3s">
+                                    <img src="~/uploads/@Model.WelcomeHospital.Photo" class="img-fluid" alt="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="welcome-content">
+                                    <h2>@Model.WelcomeHospital.Heading</h2>
+                                    <p>@Model.WelcomeHospital.Content</p>
+                                    <div class="img text-left">
+                                        <img src="~/uploads/@Model.WelcomeHospital.SecondPhoto" class="img-fluid" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="welcome-hospital-icon wow fadeInRight" data-wow-duration="3s">
+                        <div class="welcome-hospital-link">
+                            <a asp-controller="Appointment" asp-action="Index">
+                                <i class="fas fa-calendar-week"></i>
+                                <span>Request Appointment</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                            <a asp-controller="DoctorSearch" asp-action="Index">
+                                <i class="fas fa-user-md"></i>
+                                <span>Find Doctors</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                            <a asp-controller="Contact" asp-action="Index">
+                                <i class="fas fa-phone-alt"></i>
+                                <span>Emergency Contact</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Welcome-hospital section end -->
+
+    <!-- Services section start -->
+    <section id="services">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="content wow fadeInDown" data-wow-duration="3s">
+                        <h4>Departments</h4>
+                        <h2>Our Medical Services</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="services-corusel mt-5">
+                <div class="owl-carousel owl-theme">
+                    @foreach (var item in Model.HomeServices)
+                    {
+                        <div class="item">
+                            <div class="department-box">
+                                <div class="item-icon">
+                                    <img src="~/uploads/@item.Photo" class="img-fluid" alt="">
+                                </div>
+                                <h3 class="item-title">
+                                    <a href="#">@item.Title</a>
+                                </h3>
+                                <p>@item.Content</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="owl-dots">
+                    <div class="owl-dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Services section end -->
+
+    <!-- Speciality section start -->
+    <section id="speciality" style="background-image: url(/uploads/c3.jpg)">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="title wow fadeInDown" data-wow-duration="3s">
+                        <h4>Why Choose Us</h4>
+                        <h2>What’s Our Speciality</h2>
+                    </div>
+                </div>
+            </div>
+            <ul class="nav nav-pills row">
+                <li class="nav-item col-lg-4">
+                    <a data-index="0" class="nav-link active" href="#">Modern Technology</a>
+                </li>
+                <li class="nav-item col-lg-4">
+                    <a data-index="1" class="nav-link" href="#">Success of Treatments</a>
+                </li>
+                <li class="nav-item col-lg-4">
+                    <a data-index="2" class="nav-link" href="#">Certified Doctors</a>
+                </li>
+            </ul>
+            <div data-index="0" class="tab-content wow zoomIn show" data-wow-duration="3s">
+                <div class="tab-panel">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-12 col-sm-12">
+                            <div class="services-tab-content">
+                                <h3 class="item-title">@Model.HomeSpecialityModern.Title</h3>
+                                <p>@Model.HomeSpecialityModern.Content</p>
+                                <ul class="list-info">
+                                    @foreach (var item in Model.HomeSpecialityModern.Text.Split(","))
+                                    {
+
+
+                                        <li><i class="fas fa-check-circle"></i>@(@item)</li>
+
+                                    }
+                                </ul>
+                                <a href="#" class="item-btn"> See All Services<i class="fas fa-angle-double-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-7 col-md-12 col-sm-12">
+                            <div class="item-img">
+                                <img src="~/uploads/@Model.HomeSpecialityModern.Photo" alt="">
+                                <div class="vidio-icon">
+                                    <a class="play-btn" href="#"><i class="fas fa-play"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-index="1" class="tab-content d-none">
+                <div class="achive-content">
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12">
+                            <a class="play-btn" href="#"><i class="fas fa-play"></i></a>
+                            <h3 class="item-title">@Model.HomeSpecialitySucces.Title</h3>
+                            <p>@Model.HomeSpecialitySucces.Content</p>
+                            <ul class="list-info">
+                                @foreach (var item in Model.HomeSpecialitySucces.Text.Split(","))
+                                {
+                                    <li><i class="fas fa-check-circle"></i>@item</li>
+                                }
+                            </ul>
+                            <a href="#" class="item-btn"> See All Services<i class="fas fa-angle-double-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-index="2" class="tab-content d-none">
+                <div class="row">
+                    <div class="col-lg-5 col-md-12 col-sm-12">
+                        <div class="content">
+                            <h3 class="item-title">@Model.HomeSpecialityDoctor.Title</h3>
+                            <p>@Model.HomeSpecialityDoctor.Content</p>
+                            <a href="#" class="item-btn"> See All Services<i class="fas fa-angle-double-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-md-12 col-sm-12">
+                        <div class="item-img">
+                            <img src="~/uploads/@Model.HomeSpecialityDoctor.Photo" alt="">
+                            <div class="vidio-icon">
+                                <a class="play-btn" href="#"><i class="fas fa-play"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Speciality section end -->
+
+    <!-- Specialist-Doctors start -->
+    <section id="specialist-doctors">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="specialist wow fadeInDown" data-wow-duration="3s">
+                        <h4>Meet Our Team</h4>
+                        <h2>Specialist Doctors</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="specialist-corusel mt-5">
+                <div class="owl-carousel owl-theme">
+                    @foreach (var item in Model.Doctors)
+                    {
+                        <div class="item">
+                            <div class="team-box">
+                                <div class="item-img  wow zoomIn">
+                                    <img src="~/uploads/@item.Photo" width="230" height="230" alt="">
+                                    <a href="#"><span>+</span></a>
+                                </div>
+                                <div class="item-content">
+                                    <h3 class="item-title">
+                                        <a asp-controller="DoctorDetail" asp-action="Index" asp-route-id="@item.Id">@item.FullName</a>
+                                    </h3>
+                                    <p>@item.Department.Name</p>
+                                </div>
+                                <div class="item-social">
+                                    <ul>
+                                        <li>
+                                            <a href="@item.Facebook"><i class="fab fa-facebook-f"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="@item.Twitter"><i class="fab fa-twitter"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="@item.Linkedin"><i class="fab fa-linkedin-in"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="@item.Gmail"><i class="fab fa-google-plus-g"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Specialist-Doctors start -->
+
+    <!-- Need-doctor section start -->
+    <partial name="_NeedDoctor" />
+    <!-- Need-doctor section end -->
+
+    <!-- Helth section start -->
+    <section id="helth">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="helthy wow fadeInDown" data-wow-duration="3s">
+                        <h4>Working Process</h4>
+                        <h2>How It Helps You Stay Healthy</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+              @foreach (var item in Model.HomeHealths)
+                {
+                <div class="col-lg-3 col-md-6">
+                    <div class="item">
+                        <div class="item-number"><span></span></div>
+                        <div class="item-icon wow bounce"><a href="#"><img src="~/uploads/@item.Photo" class="img-fluid" alt=""></a></div>
+                        <div class="item-content">
+                            <h3 class="title">
+                                <a href="#">@item.Title</a>
+                            </h3>
+                            <p>@item.Content</p>
+                        </div>
+                    </div>
+                </div>
+              }
+           </div>
+        </div>
+    </section>
+    <!-- Helth section end -->
+
+    <!-- Counter section start -->
+    <partial name="_Counter" model="Model.HomeCounters" />
+    <!-- Counter section end -->
+
+    <!-- Testimonial section start -->
+    <partial name="_Testimonial" model="Model.HomeTestimonials" />
+    <!-- Testimonial section end -->
+
+    <!-- News section start -->
+    <section id="news">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="latest-news wow fadeInDown" data-wow-duration="3s">
+                        <h4>Articles</h4>
+                        <h2>Our Latest News</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="blog-post">
+                    @foreach (var item in Model.HomeNews)
+                    {
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <div class="item-post">
+                                <div class="blog-post-item">
+                                    <div class="item-img">
+                                        <a href="#"><img src="~/uploads/@item.Photo" class="img-fluid" alt=""></a>
+                                    </div>
+                                    <div class="item-content">
+                                        <div class="post-data">
+                                            <i class="far @item.Icon"></i>
+                                            @item.Date.ToString("MMMMM dd, yyyy")
+                                            <span>&nbsp;</span>
+                                            <i class="fas fa-user"></i>
+                                            <span class="card-icon">
+                                                <a href="#">admin</a>
+                                            </span>
+                                        </div>
+                                        <h3 class="item-title"><a href="#">@item.Title</a></h3>
+                                        <p>@item.Content</p>
+                                        <div class="post-action">
+                                            <ul>
+                                                <li>
+                                                    <a class="item-btn" href="#">
+                                                        Read More
+                                                        <i class="fas fa-long-arrow-alt-right"></i>
+                                                    </a>
+                                                </li>
+                                                <li class="card-comment">
+                                                    <a href="#">
+                                                        <i class="fas fa-comments"></i>
+                                                        @item.Count
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+        </div>
+    </section>
+    <!-- News section end -->
+
+    <!-- Brand section start -->
+    <partial name="_Brand" model="Model.HomeBrands" />
+    <!-- Brand section end -->
+</main>

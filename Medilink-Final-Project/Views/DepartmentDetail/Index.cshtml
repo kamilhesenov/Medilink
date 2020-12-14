@@ -1,0 +1,150 @@
+﻿@model DepartmentDetailViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<main>
+    <!-- Banner section start -->
+    <section id="banner" style="background-image: url(/uploads/banner.jpg)">
+        <div class="page-banner">
+            <div class="container-fluid">
+                <div class="banner-connet">
+                    <h1>@Model.Department.Name</h1>
+                    <div class="breadcrumb-area">
+                        <div class="banner-breadcrumb">
+                            <span class="icon">
+                                <a href="#">
+                                    <span>Medilink</span>
+                                    &nbsp;
+                                </a>
+                                >
+                                <a href="#">
+                                    &nbsp;
+                                    <span>Departments</span>
+                                    &nbsp;
+                                </a>
+                                >
+                                <a href="#">
+                                    &nbsp;
+                                    <span>Dedicated</span>
+                                    &nbsp;
+                                </a>
+                                >
+                            </span>
+                            <span class="post-page">@Model.Department.Name</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Banner section end -->
+
+    <!-- Department Detail section start -->
+    <section id="department-detail">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <div class="widget-department-info wow fadeInLeft" data-wow-duration="3s">
+                                <h2>All Departments</h2>
+                                <ul class="tab-nav-list">
+                                    @foreach (var item in Model.Departments)
+                                    {
+                                        <li class="nav-item">
+                                            <a asp-controller="DepartmentDetail" asp-action="Index" asp-route-id="@item.Id">@item.Name <i class="fas fa-angle-right"></i></a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                            <div class="call-to-action wow fadeInLeft" data-wow-delay="0.5s" data-wow-duration="3s">
+                                <div class="media">
+                                    <img src="assets/img/figure6.png" class="img-fluid" alt="">
+                                    <div class="media-body">
+                                        <h4>Emergency Cases</h4>
+                                        <span>+001236540256</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="widget-schedule wow fadeInLeft" data-wow-delay="1s" data-wow-duration="3s">
+                                <h3>Opening Hours</h3>
+                                <ul>
+                                    <li>Saturday - Monday: <span>09:00 am - 10.00 pm</span></li>
+                                    <li>Tuesday - Thursday: <span>09:00 am - 10.00 pm</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-12 col-sm-12">
+                            <div class="single-department-box wow fadeInRight" data-wow-duration="3s">
+                                <div class="single-department-data">
+                                    <div class="single-department-img">
+                                        <img src="~/uploads/@Model.Department.Photo" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="department-content">
+                                        <div class="item-content">
+                                            <h3>@Model.Department.Name</h3>
+                                            <p>@Model.Department.Content</p>
+                                            <p>@Model.Department.Advantage</p>
+                                            <h3>Advantage:</h3>
+                                            <p>@Model.Department.Advantage</p>
+                                            <ul class="department-info">
+                                                @foreach (var item in Model.Department.Text.Split(","))
+                                                {
+                                                    <li><i class="fas fa-angle-right"></i> @item</li>
+                                                }
+
+                                            </ul>
+                                            <p>@Model.Department.Advantage</p>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                <div class="item-cost">
+                                                    <h3>Our Pricing Plan</h3>
+                                                    <ul>
+                                                        <li>Dental Implant<span>$45.00</span></li>
+                                                        <li>Another Feature<span>$50.00</span></li>
+                                                        <li>Another Major Feature<span>$55.00</span></li>
+                                                        <li>Emergency Care<span>$25.00</span></li>
+                                                        <li>Prescription Drugs<span>$30.00</span></li>
+                                                        <li>Specialist Visits<span>$20.00</span></li>
+                                                        <li>Rheumatology<span>$25.00</span></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-specialist-department">
+                                            <h3>Meet Our Doctors</h3>
+                                        </div>
+                                        <div class="row">
+                                            @foreach (var item in Model.Department.Doctors)
+                                            {
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                    <div class="item-specialist">
+                                                        <div class="media">
+                                                            <div class="item-img">
+                                                                <img src="~/uploads/@item.Photo" alt="">
+                                                            </div>
+                                                            <div class="item-content">
+                                                                <h4><a asp-controller="DoctorDetail" asp-action="Index" asp-route-id="@item.Id">@item.FullName</a></h4>
+                                                                <span>BDS, FCPS (Hons), PhD (Japan)</span>
+                                                                <p>@item.Department.Name</p>
+                                                                <a class="appointment-btn" asp-controller="DoctorDetail" asp-action="Index" asp-route-id="@item.Id">Make an Appointment</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Department Detail section end -->
+</main>
+

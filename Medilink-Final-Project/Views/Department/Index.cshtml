@@ -1,0 +1,19 @@
+﻿@model DepartmentViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<main>
+    <!-- Banner section start -->
+    <partial name="_Banner" model="Model.BannerViewModel" />
+    <!-- Banner section end -->
+
+    <!-- Departments section start -->
+    <partial name="_Department" model="Model.DepartmentPaginationViewModel" />
+    <!-- Departments section end -->
+
+    <!-- Need-doctor section start -->
+    <partial name="_NeedDoctor" />
+    <!-- Need-doctor section end -->
+</main>
+

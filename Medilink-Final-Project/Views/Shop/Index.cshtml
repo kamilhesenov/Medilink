@@ -1,0 +1,134 @@
+﻿@model ShopViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<main>
+    <!-- Banner section start -->
+    <partial name="_Banner" model="Model.BannerViewModel" />
+    <!-- Banner section end -->
+    <!-- Products section start -->
+    <section id="products">
+        <div class="container-fluid">
+            <div class="search">
+                <div class="team-search">
+                    <div class="search-element-widjet">
+                        <div class="search-element">
+                            <div class="team-search-box">
+                                <form asp-action="Index" method="get" id="medicine-form">
+                                    <div class="row">
+                                        <div class="col-lg-8 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <input class="doctor-name form-controll" type="text" id="name" name="name" placeholder="Type Medicine Name Here ...">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="medicine-items">
+                                @foreach (var item in Model.Shops)
+                                {
+                                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12" data-role="shop">
+                                        <div class="medicine-item wow fadeInUp" data-wow-duration="3s">
+                                            <div class="team-box">
+                                                <div class="item-img">
+                                                    <img src="~/uploads/@item.Photo" class="img-fluid" alt="">
+                                                    <div class="item-icon">
+                                                        <a class="add-to-basket"><i class="fas fa-shopping-cart addToBasket" data-id="@item.Id"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="item-content">
+                                                    <h3 class="item-content-title">@item.Name</h3>
+                                                    <div class="item-star">
+                                                        @for (int i = 0; i < item.Star; i++)
+                                                        {
+                                                            <i class="fas fa-star"></i>
+                                                        }
+                                                    </div>
+                                                    <div class="item-price">
+                                                        <span class="price">@item.Price.ToString("#.00") ₼</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Products section end -->
+</main>
+
+@section Scripts{
+
+
+    <script src="~/js/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        $(".doctor-name").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $('div[data-role="shop"]').filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+
+    </script>
+
+    <script>
+
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-center",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+
+        let allAddSpan = document.querySelectorAll(".addToBasket")
+        allAddSpan.forEach(item => {
+            item.addEventListener("click", function () {
+                event.preventDefault();
+                let id = $(this).attr("data-id");
+                toastr.success(`just added to your cart`)
+                $.ajax({
+                    url: "/Basket/AddBasket?Id=" + id,
+                    type: "Get",
+                    success: function (res) {
+                        console.log(res.basketProductCount);
+                       
+                        if (res.basketProductCount != null) {
+                            let totalCountNav = document.getElementById('totalCountNav');
+                            totalCountNav.innerHTML = res.basketProductCount;
+                        }
+                        else {
+                            window.location = "/Account/Login";
+                        }
+                        
+                    }
+                })
+            })
+        })
+    </script>
+}
+
+@section Style{
+    <style>
+        .add-to-basket {
+            cursor: pointer;
+        }
+    </style>
+}

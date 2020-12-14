@@ -1,0 +1,35 @@
+﻿@model List<Medilink_Final_Project.Models.Home.HomeCounter>
+<!-- Counter section start -->
+<section id="counter">
+    <div class="container-fluid">
+        <div class="count">
+            <div class="row">
+                <div class="fixed-bg">
+                    @foreach (var item in Model)
+                    {
+                        <div class="fun-factor-area">
+                            <div class="count-fixed">
+                                <div class="fixed-count">
+                                    <div class=" col-lg-3 progress-box">
+                                        <div class="inner-item">
+                                            <div class="item-icon">
+                                                <img src="~/uploads/@item.Photo" alt="">
+                                            </div>
+                                            <div class="item-content">
+                                                <div class="timer" data-steps="10" data-to="22" data-speed="5000">@item.Count</div>
+                                                <p>@item.Content</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- Counter section end -->

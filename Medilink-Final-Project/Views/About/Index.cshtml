@@ -1,0 +1,120 @@
+﻿@model AboutViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<main>
+    <!-- Banner section start -->
+    <partial name="_Banner" model="Model.BannerViewModel" />
+    <!-- Banner section end -->
+    <!-- Laboratory section start -->
+    <section id="laboratory">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                    <div class="laboratory-content wow fadeInLeft" data-wow-duration="3s">
+                        <div class="elementor">
+                            <div class="inner-elementoe">
+                                <div class="elementor-section">
+                                    <div class="elementor-content">
+                                        <h2 class="heading">@Model.Labaratory.Heading</h2>
+                                        <h2 class="title">@Model.Labaratory.Title</h2>
+                                        <p>@Model.Labaratory.Content</p>
+                                        <p>@Model.Labaratory.Subject</p>
+                                        <div class="about-info-list">
+                                            <ul class="list-info">
+                                                @foreach (var item in Model.Labaratory.Text.Split(","))
+                                                {
+                                                    <li><i class="fas fa-check"></i>@item</li>
+                                                }
+
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                    <div class="laboratory-icon wow fadeInRight" data-wow-duration="3s">
+                        <div class="elementor">
+                            <div class="item-vidio">
+                                <img src="~/uploads/@Model.Labaratory.Photo" alt="">
+                                <div class="video-icon">
+                                    <a href="#"><i class="fas fa-play"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Laboratory section end -->
+    <!-- Departments section start -->
+    <partial name="_Department" model="Model.DepartmentPaginationViewModel" />
+    <!-- Departments section end -->
+    <!-- Counter section start -->
+    <partial name="_Counter" model="Model.HomeCounters" />
+    <!-- Counter section end -->
+    <!-- Choose-us section start -->
+    <section id="choose-us">
+        <div class="choose">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="us">
+                        <div class="choose-column">
+                            <div class="choose-widget">
+                                <div class="choose-title">
+                                    <div class="choose-heading">
+                                        <h2>Why People Choose Us?</h2>
+                                        <p class="rtin-subtitle">
+                                            We offer extensive medical services for our patients recommend <br>
+                                            that you use officia.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="choose-data wow fadeInLeft" data-wow-duration="3s">
+                                    <div class="col-lg-12 col-md-6">
+                                        <div class="choose-acordin">
+                                            @foreach (var item in Model.AboutChooseUsItems)
+                                            {
+                                                <div class="choose-acordin-item">
+                                                    <h3 class="acordin-title">
+                                                        <span class="acordin-icon">
+                                                            <span class="acordin-icon-open"><i class="fas fa-plus"></i></span>
+                                                            <span class="acordin-icon-closed"><i class="fas fa-minus"></i></span>
+                                                        </span>
+                                                        <a href="#">@item.Title</a>
+                                                    </h3>
+                                                    <div class="tab-content show">
+                                                        <p>@item.Content</p>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="img wow fadeInRight" data-wow-duration="3s">
+                                <img src="~/uploads/@Model.AboutChooseUs.Photo" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Choose-us section end -->
+    <!-- Testimonial section start -->
+    <partial name="_Testimonial" model="Model.HomeTestimonials" />
+    <!-- Testimonial section end -->
+    <!-- Brand section start -->
+    <partial name="_Brand" model="Model.HomeBrands" />
+    <!-- Brand section end -->
+</main>
+

@@ -1,0 +1,90 @@
+﻿@model Medilink_Final_Project.Models.Doctor
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="d-flex justify-content-center align-items-center"><h1>Details</h1></div>
+
+<div>
+    <hr />
+    <dl class="row ml-5">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Photo)
+        </dt>
+        <dd class="col-sm-10">
+            <img src="~/uploads/@Model.Photo" width="150" />
+        </dd>
+        <dt class="col-sm-2">
+            Department Name
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Department.Name
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AboutMe)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AboutMe)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Office)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Office)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Facebook)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Facebook)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Twitter)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Twitter)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Linkedin)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Linkedin)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Gmail)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Gmail)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+    </dl>
+</div>
+<div class="d-flex justify-content-center align-items-center mt-5">
+    <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@Model.Id"><i class="fas fa-edit"></i></a>
+    <a class="btn btn-outline-secondary ml-3" asp-action="Index">Return to Back</a>
+</div>
+

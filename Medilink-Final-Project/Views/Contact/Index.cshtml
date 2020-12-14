@@ -1,0 +1,142 @@
+﻿@model ContactViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<main>
+    <!-- Banner section start -->
+    <partial name="_Banner" model="Model.BannerViewModel" />
+    <!-- Banner section end -->
+
+    <!-- Contact section start -->
+    <section id="contact">
+        <div class="container-fluid">
+            <div class="contact-us">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 wow fadeInLeft" data-wow-duration="3s">
+                        <div class="leave-message">
+                            <div class="content">
+                                <h2>Leave Us Message</h2>
+                            </div>
+                            <form id="contactForm">
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input asp-for="@Model.ContactSendViewModel.Name" type="text" class="form-control name" id="name" aria-describedby="nameHelp">
+                                    <span asp-validation-for="@Model.ContactSendViewModel.Name" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input asp-for="@Model.ContactSendViewModel.Email" type="email" class="form-control email" id="email">
+                                    <span asp-validation-for="@Model.ContactSendViewModel.Email" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Message</label>
+                                    <textarea asp-for="@Model.ContactSendViewModel.Message" class="form-control message"></textarea>
+                                    <span asp-validation-for="@Model.ContactSendViewModel.Message" class="text-danger"></span>
+                                </div>
+                                <button type="submit" class="add-contact">Send</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 wow fadeInRight" data-wow-duration="3s">
+                        <div class="leave-message">
+                            <div class="heading">
+                                <h2>Address</h2>
+                            </div>
+                            <div class="contact-social">
+                                <ul>
+                                    <li><i class="fas fa-map-marker"></i>@Model.Setting.Address</li>
+                                    <li><i class="fas fa-phone-square"></i>@Model.Setting.Phone</li>
+                                    <li><i class="far fa-envelope"></i>@Model.Setting.Email</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contact section end -->
+</main>
+
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    
+    <script>
+
+        $(document).ready(function () {
+            $("#contactForm").submit(function (e) {
+                e.preventDefault();
+                let formData = {
+                    Name: $(".name").val(),
+                    Email: $(".email").val(),
+                    Message: $(".message").val()
+                };
+
+                $.ajax({
+                    url: "/contact/Send",
+                    type: "post",
+                    data: formData,
+                    success: function (response) {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Your message has sended',
+                            showConfirmButton: false,
+                            timer: 1500
+                        }).then(function (result) {
+                            $(".name").val("");
+                            $(".email").val("");
+                            $(".message").val("");
+                        })
+                    },
+                    error: function (error) { }
+                })
+            })
+        })
+
+
+        //$(".add-contact").click(function () {
+        //    //ValidateEmail();
+        //    if ($(".name").val() != "" &&  $(".email").val() != "" && $(".message").val() != "") {
+        //        let formData = new FormData();
+        //        formData.append("Name", $(".name").val());
+        //        formData.append("Email", $(".email").val());
+        //        formData.append("Message", $(".message").val());
+        //        axios.post('/contact', formData)
+        //            .then(function (response) {
+        //                Swal.fire({
+        //                    position: 'top-end',
+        //                    icon: 'success',
+        //                    title: 'Your message has sended',
+        //                    showConfirmButton: false,
+        //                    timer: 1500
+        //                }).then(function (result) {
+        //                    $(".name").val("");
+        //                    $(".email").val("");
+        //                    $(".message").val("");
+        //                })
+        //            })
+        //            .catch(function (error) {
+        //                console.log(error);
+        //            });
+        //    }
+        //   })
+            // let email = $(".email").val();
+            //function ValidateEmail(email)
+            //    {
+            //     if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(myForm.emailAddr.value))
+            //      {
+            //        return (true)
+            //      }
+            //        alert("You have entered an invalid email address!")
+            //        return (false)
+            //    }
+
+    </script>
+}
+
+

@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewData["Title"] = "Default";
+}
+
+<div class="search-box-area">
+    <div class="search-box">
+        <a asp-controller="Basket" asp-action="Index">
+            <i class="fas fa-shopping-basket"></i>
+            <div class="icon-counter">
+                <span id="totalCountNav" class="cart-count">@ViewBag.BasketCount</span>
+            </div>
+        </a>
+    </div>
+</div>
+

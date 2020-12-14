@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Medilink_Final_Project.Models.Checkout>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<table class="table table-striped table-bordered ml-1">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShopCkeckouts.FirstOrDefault().Shop.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShopCkeckouts.FirstOrDefault().Shop.Photo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShopCkeckouts.FirstOrDefault().Shop.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShopCkeckouts.Count)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Total)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @item.Date.ToString("MM/dd/yyyy HH:mm")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShopCkeckouts.FirstOrDefault().Shop.Name)
+            </td>
+            <td>
+                <img width="100" src="~/uploads/@item.ShopCkeckouts.FirstOrDefault().Shop.Photo" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShopCkeckouts.FirstOrDefault().Shop.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShopCkeckouts.Count)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
